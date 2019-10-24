@@ -28,7 +28,7 @@ void R_init_collpcm( DllInfo *info )
 static void collapsed_lpcm( int *Y, int *nnodes, int *dimlatent, int *ncovariates, double *covariates, int *directed, int *maxgroups, int *initgroups, int *sample, int *burn, int *interval, int *modelsearch, double *hyparams, double *log_prior_groups, double *prparams, double *initparams, double *initialpositions, int *return_allocations, double *return_latent_positions, double *return_abundance, int *return_ngroups, double *return_llike, double *return_theta, double *return_delta, double *return_kappa, double *accrt_latent_positions,double *accrt_abundance, double *accrt_metmoves, double *accrt_ejectabsorb, double *accrt_theta, int *nthread, int *update_gamma, int *update_kappa, int *npilot, int *store_sparse, int *adapt, int *adapt_int, int *bradley_terry, int *verbose )
 {
 	
-	int i,j,it,actori,s,fixedG=1-*modelsearch;
+	int i,j,it,actori,fixedG=1-*modelsearch;
 	double tinit, lps;
 	
 	int nburn = *burn, niterations = (*sample) * (*interval) + (*burn) ;
@@ -45,16 +45,16 @@ static void collapsed_lpcm( int *Y, int *nnodes, int *dimlatent, int *ncovariate
 	
 	double *prior_hparams,*tc;
 	
-	prior_hparams = calloc(4,sizeof(double));
-	tc = calloc(2,sizeof(double));
+	prior_hparams = (double *)calloc(4,sizeof(double));
+	tc = (double *)calloc(2,sizeof(double));
 	
 	//setstartime(tc);
 	
 	//cross reference with other code
 	double sigmab = prparams[0], sigmaz = prparams[1], 
-		   bcur = initparams[0], thetainit = initparams[1];
+		   bcur = initparams[0] ;//, thetainit = initparams[1];
 	
-	double *thetainitpar = calloc( 2, sizeof(double) );
+	double *thetainitpar = (double *)calloc( 2, sizeof(double) );
 	
 	if(*ncovariates == 0){
 		tinit = 0.;
@@ -71,12 +71,12 @@ static void collapsed_lpcm( int *Y, int *nnodes, int *dimlatent, int *ncovariate
 	
 	initresy( yres, *ncovariates );
 	
-	if(ncovariates > 0){
+	if(*ncovariates > 0){
 	//	put_covariates(covariates,network);
 	}
 
-	int *Gcount;
-	Gcount = calloc(*maxgroups,sizeof(int));
+	//int *Gcount;
+	//Gcount = (int *)calloc(*maxgroups,sizeof(int));
 	
 	nw->pmix->gamma = hyparams[2];
 	nw->pmix->delta = hyparams[3];
@@ -112,7 +112,7 @@ static void collapsed_lpcm( int *Y, int *nnodes, int *dimlatent, int *ncovariate
 	
 	double accrt, del, Del;
 	
-	int *order = calloc( *nnodes, sizeof(int) );
+	int *order = (int *)calloc( *nnodes, sizeof(int) );
 	
 	if( *verbose ) Rprintf("\n\t Starting MCMC iterations... ");
 	

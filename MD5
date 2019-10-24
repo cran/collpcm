@@ -1,4 +1,4 @@
-9cc79f65150255ffecfc6bcc9a93763e *DESCRIPTION
+4f17fcb21b74708372895e818ab3af0a *DESCRIPTION
 5addd89225f6b45e9eca7695fba33adb *NAMESPACE
 b19eaf3068bbf99f482c3dd8ce247648 *R/collpcm.control.R
 36517ad94621663ff8a47d9dcaba90bb *R/collpcm.fit.R
@@ -22,14 +22,14 @@ f0c350c5fa17baaf5f9740f79c6e363f *man/Monks.Rd
 c8b11211bb07a9a8e853e80448ab3b82 *man/plot.collpcm.Rd
 2c791c683cc8f7152a8cb252996b2566 *man/print.collpcm.Rd
 be224fbccd3cc0104d385db00e335139 *man/summary.collpcm.Rd
-a1e8594689bc80833f74f4c7fad30a8e *src/GaussianMixtureModel.c
+7f29032ff138d6f0d2847b1fdd35899f *src/GaussianMixtureModel.c
 6ac19b456ad90ba89a6fc44488c8d671 *src/GaussianMixtureModel.h
-3e0635d28e43da90fa38184d5ca10367 *src/NetworkLib.c
+f4aaddc4a8512e89bdfffb9d35201e58 *src/NetworkLib.c
 09179be545143d23df4f7bec5bcd70c3 *src/NetworkLib.h
 b39c8fa7d2b5813914d0c36423b4eb42 *src/atable.h
 ac33ac306b01a62f3cda20a025465c91 *src/cat.c
 d07f233a93f0d67d1d4d5703c60f6db2 *src/cat.h
-c7961da67f860e7415da824bc07f2fac *src/collapsed_lpcm.c
+69db19ddc73c3c1a403e5d110cf0a157 *src/collapsed_lpcm.c
 aef01fa2fb9e4a4bab6703708bc94c29 *src/nrutil.c
 f56fe1272ba61dd16b835694e40e3e42 *src/nrutil.h
 7997655774e2ad027f64c1da36b3fdd7 *src/required_libs.h

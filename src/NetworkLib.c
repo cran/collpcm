@@ -177,7 +177,7 @@ void network_destroy( struct network *nw )
 
 void network_initialize( struct network *nw, int *Y, double beta, double *theta, double *hyper_params, double sigmab, double sigmaz, double *sigmatheta, double *initialpositions, double *log_prior_groups )
 {
-	int k, p = nw->p, n = nw->n  ;
+	int k, p = nw->p ;
 	
 	put_network( Y, nw );
 	
@@ -277,16 +277,16 @@ void zupdatemh( struct network * nw, struct resy * presy, int i, int itnum, int 
 	double llik_curr = llike_node( nw, i ), 
 			 *xdelta,
 			 xdelta_,
-			 *x, x_ ;
+			 *x ;
 
-	if( d > 1 ) xdelta = calloc( d, sizeof(double) ) ;
+	//if( d > 1 ) xdelta = (double *)calloc( d, sizeof(double) ) ;
 	
 	//Rprintf("\n llikcurr = %.5f", llik_curr ); 
 
 	if( d > 1 ) 
 	{
 		x = mix->Y[i]; 
-		xdelta = calloc( d, sizeof(double) );
+		xdelta = (double *)calloc( d, sizeof(double) );
 	}
 
 	struct component *comp = mix->components[ mix->whereis[g] ] ;
@@ -410,9 +410,7 @@ double get_eta( double b, int d, double *x_1, double *x_2 )
 
 double llike_node(struct network * nw, int i)
 {
-  int    j, d = nw->pmix->d, 
-  			*y_i = nw->y[i], *yt_i = nw->y_transpose[i], 
-  			dir = nw->dir, diry ;
+  int    j, *y_i = nw->y[i], *yt_i = nw->y_transpose[i] ;
   
   double loglike = 0., eta, b = nw->beta, /***X = py->pmix->Y ,*/*d_i = nw->dist[i], prob;
   
@@ -456,8 +454,7 @@ double llike_node(struct network * nw, int i)
 double llike_full(struct network * nw )
 {
 
-  int    i, j , n = nw->n, d = nw->pmix->d,
-  			*y_i, *yt_i;
+  int i, j , n = nw->n, *y_i, *yt_i;
   			
   double loglike = 0.0, eta, b = nw->beta, /***X = py->pmix->Y,*/ *d_i, prob ;
   
