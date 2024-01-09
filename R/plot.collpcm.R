@@ -8,7 +8,7 @@ plot.collpcm <- function( x, ..., G = NULL, label.nodes = NULL, pie = TRUE, vert
 {
 	#input: a collpcm object
 
-	if( class( x ) != "collpcm" ) stop("\n Argument is not of type collpcm" ) 
+	if( !inherits(x,"collpcm") ) stop("\n Argument is not of type collpcm" ) 
 	
 	if( x$call$d > 2 ) stop("Plotting only avilable for d <= 2")
 

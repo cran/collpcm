@@ -1,3 +1,10 @@
+# collpcm 1.3
+
+## Minor changes
+
+- Fixed bug in MKL position finding for latent dimension `d=1`; this bug did not cause any problems for `d=2` but meant that for `d=1` the run would break at the MKL optimization
+- Fixed minor bug in beta initialization in `collpcm.control()`; it is unlikely that this bug had a significant impact on results
+
 # collpcm 1.2
 
 ## Minor changes

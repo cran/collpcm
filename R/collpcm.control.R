@@ -1,19 +1,19 @@
-collpcm.control <- function( x = list() , n, d )
+collpcm.control <- function( x = list(), n, d )
 {
   
   vals <- list(
     # hyperparameters and priors
     G = sample(2:5, size=1), Gmax = floor(n/2), Gprior = NULL, xi = 0, psi = sqrt(2), 
-    gamma = 0.103, delta = 2, alpha = 3, kappa = 0.1,
+    gamma = 0.103, delta = 2, alpha = 3, kappa = 0.1, upsilon = 0.1,
     
     # initialization
-    betainit = rnorm( 0, sd=.01 ), Xinit = rnorm(d*n,0,1),
+    betainit = rnorm(1, 0, sd=.01 ), Xinit = rnorm(d*n,0,1), tauinit = 0, #rnorm(1,0,0.01),
     
     # mcmc settings
-    sample = 5000, burn = 5000, interval = 10, model.search = TRUE, pilot = 0,
+    sample = 5000, burn = 5000, interval = 10, model.search = TRUE, pilot = 1000,
     
     # proposals
-    sd.beta.prop = sqrt(0.5), sd.X.prop = 1,
+    sd.beta.prop = sqrt(0.5), sd.X.prop = 1, sd.tau.prop = sqrt(0.1),
     
     # updates and storage
     gamma.update = TRUE, adapt = TRUE, adapt.interval = 200, store.sparse = FALSE, MKL = TRUE,
@@ -34,6 +34,6 @@ collpcm.control <- function( x = list() , n, d )
   
   # set Gprior
   if( is.null( vals[["Gprior"]] ) ) vals[["Gprior"]] <- dpois( 0:vals[["Gmax"]], lambda=1., log=TRUE )
-  
+
   return( vals )
 }
