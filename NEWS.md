@@ -1,3 +1,9 @@
+# collpcm 1.4
+
+## Minor changes
+
+- Correction to label switching algorithm for when number of groups is fixed through `model.search=FALSE` in `collpcm.control()`
+
 # collpcm 1.3
 
 ## Minor changes

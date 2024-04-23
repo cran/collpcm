@@ -120,15 +120,18 @@ collpcm.undo.label.switching <- function( Z, Gsamp = NULL )
   for( k in ret$item.tags[[1]] ) Zrelab[k,] <- pmatch( Zrelab[k,], o, duplicates.ok = TRUE ) # relabel the memberships
   
   # now match decreasing groups to this
-  for( j in 2:length(G) ) 
+  if( length(G) > 1 )
   {
-    p <- permutations( G[j], G[j] )
-    cst <- numeric( nrow(p) ) 
-    prev.pr <- cbind( ret$membership.probabilities[[j-1]], matrix( 0, nrow=nobs, ncol= G[j]-G[j-1] ))
-    for( k in 1:nrow(p) ) cst[k] <-  sum( prev.pr * ret$membership.probabilities[[j]][,p[k,]] )
-    o <- p[ which.max(cst), ]
-    ret$membership.probabilities[[j]] <- ret$membership.probabilities[[j]][,o]
-    for( k in ret$item.tags[[j]] ) Zrelab[k,] <- pmatch( Zrelab[k,], o, duplicates.ok = TRUE )
+    for( j in 2:length(G) ) 
+    {
+      p <- permutations( G[j], G[j] )
+      cst <- numeric( nrow(p) ) 
+      prev.pr <- cbind( ret$membership.probabilities[[j-1]], matrix( 0, nrow=nobs, ncol= G[j]-G[j-1] ))
+      for( k in 1:nrow(p) ) cst[k] <-  sum( prev.pr * ret$membership.probabilities[[j]][,p[k,]] )
+      o <- p[ which.max(cst), ]
+      ret$membership.probabilities[[j]] <- ret$membership.probabilities[[j]][,o]
+      for( k in ret$item.tags[[j]] ) Zrelab[k,] <- pmatch( Zrelab[k,], o, duplicates.ok = TRUE )
+    }
   }
   
   names( ret$membership.probabilities ) <- paste0("G=", G ) 
